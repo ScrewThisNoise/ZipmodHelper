@@ -1,0 +1,27 @@
+﻿<Window x:Class="ZipmodHelper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZipmodHelper"
+        mc:Ignorable="d"
+        Title="BetterRepack ZipMod Helper" Height="450" Width="800"
+        ResizeMode="NoResize">
+    <Grid>
+        <Image x:Name="Logo" Margin="580,49,27,290" Source="img/BRLogo.png"/>
+        <TextBox x:Name="LoggerBox" TextChanged="TextChangedEventHandler" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible"  Height="178" Margin="0,233,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="InputFolderLabel" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="72"><Run Text="Input Fol"/><Run Text="d"/><Run Text="er:"/></TextBlock>
+        <TextBox x:Name="InputFolderText" HorizontalAlignment="Left" Height="22" Margin="10,31,0,0" TextWrapping="Wrap" Text=".\BleedingEdge" VerticalAlignment="Top" Width="442" TextChanged="InputFolderText_OnTextChanged"/>
+        <Button x:Name="InputFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="457,31,0,0" VerticalAlignment="Top" Width="75" Height="22" Click="InputFolderBtn_Click"/>
+        <TextBlock x:Name="OutputFolderLabel" HorizontalAlignment="Left" Margin="10,58,0,0" TextWrapping="Wrap" Text="Output Folder:" VerticalAlignment="Top"/>
+        <TextBox x:Name="OutputFolderText" HorizontalAlignment="Left" Height="22" Margin="10,79,0,0" TextWrapping="Wrap" Text=".\Output" VerticalAlignment="Top" Width="442" TextChanged="OutputFolderText_OnTextChanged"/>
+        <Button x:Name="OutputFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="457,79,0,0" VerticalAlignment="Top" Width="75" Height="22" Click="OutputFolderBtn_Click"/>
+        <TextBlock x:Name="TempFolderLabel" HorizontalAlignment="Left" Margin="10,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Temp"/><Run Text=" Folder:"/></TextBlock>
+        <TextBox x:Name="TempFolderText" HorizontalAlignment="Left" Height="22" Margin="10,127,0,0" TextWrapping="Wrap" Text=".\WorkingDir" VerticalAlignment="Top" Width="442" TextChanged="TempFolderText_OnTextChanged"/>
+        <Button x:Name="TempFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="457,127,0,0" VerticalAlignment="Top" Width="75" Height="22" Click="TempFolderBtn_Click"/>
+        <CheckBox x:Name="RandomizeCAB" Content="Randomize CAB" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="StartBtn" Content="Start" HorizontalAlignment="Left" Margin="692,199,0,0" VerticalAlignment="Top" Width="75" Click="StartBtn_Click"/>
+        <Button x:Name="PopDBBtn" Content="Only Populate DB" HorizontalAlignment="Left" Margin="575,199,0,0" VerticalAlignment="Top" Width="112" Click="PopDBBtn_Click"/>
+
+    </Grid>
+</Window>

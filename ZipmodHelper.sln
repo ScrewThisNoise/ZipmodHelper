@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipmodHelper", "ZipmodHelper\ZipmodHelper.csproj", "{34B0EB75-7E46-4EBA-963E-4B9D49254B69}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedCode", "SharedCode\SharedCode.shproj", "{D49251F0-BEE5-41B6-9A73-CB037CF2A0C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity3DCompressor", "Unity3DCompressor\Unity3DCompressor.csproj", "{B795718A-7708-46CB-A8CE-BDA367840C39}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedCode\SharedCode.projitems*{34b0eb75-7e46-4eba-963e-4b9d49254b69}*SharedItemsImports = 4
+		SharedCode\SharedCode.projitems*{d49251f0-bee5-41b6-9a73-cb037cf2a0c1}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34B0EB75-7E46-4EBA-963E-4B9D49254B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B0EB75-7E46-4EBA-963E-4B9D49254B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B0EB75-7E46-4EBA-963E-4B9D49254B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B0EB75-7E46-4EBA-963E-4B9D49254B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B795718A-7708-46CB-A8CE-BDA367840C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B795718A-7708-46CB-A8CE-BDA367840C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B795718A-7708-46CB-A8CE-BDA367840C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B795718A-7708-46CB-A8CE-BDA367840C39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E17E1DA-D662-4BFA-AAE2-9A9420403A35}
+	EndGlobalSection
+EndGlobal
