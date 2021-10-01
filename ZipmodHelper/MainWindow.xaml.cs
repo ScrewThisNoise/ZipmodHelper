@@ -185,14 +185,16 @@ namespace ZipmodHelper
                             var version = ManifestData[2];
                             var author = ManifestData[3];
                             var game = ManifestData[4];
+                            var game2 = ManifestData[5];
 
                             //if (version == "Unknown")
                             //    version = "v1.0";
                             Console.Write("");
 
                             if (game == "Unknown") game = "NoDeclaredGame";
+                            if (game2 == "Unknown") game2 = "NoDeclaredGame";
 
-                            string realOutputFolder = $@"{OutputFolder}\{game}\{ModType}\{author}\";
+                            string realOutputFolder = $@"{OutputFolder}\{game}\{game2}\{ModType}\{author}\";
                             string outFile = Misc.FileExists(realOutputFolder, author, name, version);
 
 
@@ -253,6 +255,7 @@ namespace ZipmodHelper
                 }
             }
 
+            tagList.Clear();
             MessageBox.Show("Done");
         }
 

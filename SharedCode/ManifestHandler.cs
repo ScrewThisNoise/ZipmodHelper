@@ -18,7 +18,7 @@ namespace ScrewLib
             var website = string.Empty;
             var game = "Unknown";
             var originalgame = string.Empty;
-            var game2 = String.Empty;
+            var game2 = "Unknown";
             var originalgame2 = string.Empty;
 
             var manifestDocument = new XmlDocument();
@@ -66,7 +66,7 @@ namespace ScrewLib
                 }
 
             //let's mess with the data
-            try
+            if (tagList.Count == 1)
             {
                 if (tagList[0] == "RemoveAll")
                 {
@@ -76,12 +76,28 @@ namespace ScrewLib
                 else
                 {
                     game = tagList[0];
-                    game2 = tagList[1];
+                    game2 = "Unknown";
                 }
-                
             }
-            catch (Exception e)
+            else
             {
+                try
+                {
+                    if (tagList[0] == "RemoveAll")
+                    {
+                        game = String.Empty;
+                        game2 = String.Empty;
+                    }
+                    else
+                    {
+                        game = tagList[0];
+                        game2 = tagList[1];
+                    }
+
+                }
+                catch (Exception e)
+                {
+                }
             }
 
             // List out the final data
