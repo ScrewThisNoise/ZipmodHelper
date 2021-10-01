@@ -42,7 +42,7 @@
         <Button x:Name="PopDBBtn" Content="Only Populate DB" HorizontalAlignment="Left" Margin="575,199,0,0"
                 VerticalAlignment="Top" Width="112" Click="PopDBBtn_Click" />
         <StackPanel HorizontalAlignment="Left" Height="44" Margin="10,184,0,0" VerticalAlignment="Top" Width="544">
-            <Label x:Name="label" Content="Change game tag:" Height="24" FontSize="10" />
+            <Label x:Name="label" Content="Change game tag (max 2):" Height="24" FontSize="10" />
             <Grid Height="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -53,7 +53,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <CheckBox x:Name="KKtag" Content="KK" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <CheckBox x:Name="KKtag" Content="KK" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,57,0" />
                 <CheckBox x:Name="KKStag" Grid.Column="1" Content="KKS" HorizontalAlignment="Left"
                           VerticalAlignment="Top" />
                 <CheckBox x:Name="ECtag" Grid.Column="2" Content="EC" HorizontalAlignment="Left"
@@ -63,7 +63,7 @@
                 <CheckBox x:Name="HS2tag" Grid.Column="4" Content="HS2" HorizontalAlignment="Left"
                           VerticalAlignment="Top" />
                 <CheckBox x:Name="Removetag" Grid.Column="5" Content="Remove all" HorizontalAlignment="Left"
-                          VerticalAlignment="Top" />
+                          VerticalAlignment="Top"/>
 
             </Grid>
 

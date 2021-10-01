@@ -17,6 +17,14 @@ namespace ZipmodHelper
         string InputFolder;
         string OutputFolder;
         string TempFolder;
+        private int CheckedNumber;
+        public List<string> tagList = new List<string>();
+
+        private bool kkGameTag = false;
+        private bool kksGameTag = false;
+        private bool ecGameTag = false;
+        private bool aisGameTag = false;
+        private bool hs2GameTag = false;
 
         readonly BackgroundWorker bgWorker = new BackgroundWorker();
 
@@ -43,7 +51,7 @@ namespace ZipmodHelper
             {
                 EnableUIElements(false);
             });
-
+            
             Buttonstart_DoWork();
 
             this.Dispatcher.Invoke(() =>
@@ -137,6 +145,11 @@ namespace ZipmodHelper
         {
             Logger.Writer("----------------------------------------");
 
+            this.Dispatcher.Invoke(() =>
+            {
+                DealWithCheckboxes();
+            });
+
             if (!Directory.Exists(InputFolder))
             {
                 Logger.Writer($"Folder {InputFolder} doesn't exist!");
@@ -166,14 +179,14 @@ namespace ZipmodHelper
                             if (CABOverride) Logger.Writer($"Cab override active, Cab will be unchanged.");
 
                             // guid, name, version, author, game
-                            List<string> ManifestData = ManifestHandler.CheckIntegrity(TempFolder);
+                            List<string> ManifestData = ManifestHandler.CheckIntegrity(TempFolder, tagList);
                             var guid = ManifestData[0];
                             var name = ManifestData[1];
                             var version = ManifestData[2];
                             var author = ManifestData[3];
                             var game = ManifestData[4];
 
-                            if (version == "Unknown")
+                            //if (version == "Unknown")
                             //    version = "v1.0";
                             Console.Write("");
 
@@ -245,12 +258,31 @@ namespace ZipmodHelper
 
         private void PopDBBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void TextChangedEventHandler(object sender, TextChangedEventArgs e)
         {
             LoggerBox.ScrollToEnd();
+        }
+
+        private void DealWithCheckboxes()
+        {
+            if (Removetag.IsChecked ?? true)
+            {
+                tagList.Add("RemoveAll");
+                return;
+            }
+            if (KKtag.IsChecked ?? true)
+                tagList.Add("Koikatsu");
+            if (KKStag.IsChecked ?? true)
+                tagList.Add("Koikatsu Sunshine");
+            if (ECtag.IsChecked ?? true)
+                tagList.Add("EmotionCreators");
+            if (AIStag.IsChecked ?? true)
+                tagList.Add("AI Girl");
+            if (HS2tag.IsChecked ?? true)
+                tagList.Add("Honey Select 2");
         }
     }
 }
