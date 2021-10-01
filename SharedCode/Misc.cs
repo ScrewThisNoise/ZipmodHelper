@@ -81,9 +81,10 @@ namespace ScrewLib
             return filename;
         }
 
-        public static void PerformCompression(string TempFile, bool randomCAB)
+        public static void PerformCompression(string TempFile, bool randomCAB, bool CABOverride)
         {
-            UnityCompression.CABRandomization = randomCAB;
+            
+            UnityCompression.CABRandomization = CABOverride ? false : randomCAB;
 
             if (UnityCompression.FileIsAssetBundle(TempFile))
             {

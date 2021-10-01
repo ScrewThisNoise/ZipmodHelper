@@ -9,12 +9,25 @@ namespace ScrewLib
     {
         private static void MoveMod(string currentWorkingFile, string inputFolder, string OutputFolder, string ResultFolder)
         {
-            if (!Directory.Exists($@"{OutputFolder}\{ResultFolder}\{currentWorkingFile.Remove(0, inputFolder.Length + 1)}"))
-                Directory.CreateDirectory($@"{OutputFolder}\{ResultFolder}\{currentWorkingFile.Remove(0, inputFolder.Length + 1)}");
+            var currentDir = Path.GetDirectoryName(currentWorkingFile);
+            var currentFile = currentWorkingFile.Remove(0, currentDir.Length + 1);
+
+            var test = currentWorkingFile.Remove(currentDir.Length, currentFile.Length + 1);
+            test = currentWorkingFile.Remove(0, inputFolder.Length + 1);
+
+            if (inputFolder == test) test = string.Empty;
+            else test = currentWorkingFile.Remove(0, inputFolder.Length + 1);
+
+            var testdir =
+                $@"{OutputFolder}\{ResultFolder}\";
+            if (!Directory.Exists(testdir))
+            {
+                Directory.CreateDirectory(testdir);
+            }
             string finalfilename =
                 Misc.FileExists(
                     $@"{OutputFolder}\{ResultFolder}\", currentWorkingFile.Remove(0, inputFolder.Length + 1));
-            File.Copy(currentWorkingFile, $@"{OutputFolder}\{ResultFolder}\{finalfilename}");
+            File.Copy(currentWorkingFile, $@"{testdir}\{finalfilename}");
         }
 
         public static void InproperMod(string currentWorkingFile, string inputFolder, string OutputFolder)

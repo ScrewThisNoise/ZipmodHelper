@@ -160,7 +160,10 @@ namespace ZipmodHelper
                         if (ModIntegrity.Check(TempFolder))
                         {
                             string ModType = ModIntegrity.ModType(TempFolder);
+                            bool CABOverride = ModIntegrity.CABOverride(TempFolder);
                             Logger.Writer($"Modtype: {ModType}");
+
+                            if (CABOverride) Logger.Writer($"Cab override active, Cab will be unchanged.");
 
                             // guid, name, version, author, game
                             List<string> ManifestData = ManifestHandler.CheckIntegrity(TempFolder);
@@ -169,11 +172,22 @@ namespace ZipmodHelper
                             var version = ManifestData[2];
                             var author = ManifestData[3];
                             var game = ManifestData[4];
-                            string realOutputFolder = $@"{OutputFolder}\{ModType}\{author}\";
+
+                            if (version == "Unknown")
+                            //    version = "v1.0";
+                            Console.Write("");
+
+                            if (game == "Unknown") game = "NoDeclaredGame";
+
+                            string realOutputFolder = $@"{OutputFolder}\{game}\{ModType}\{author}\";
                             string outFile = Misc.FileExists(realOutputFolder, author, name, version);
 
+
                             if (guid == "" | version == "Unknown")
+                            {
                                 Mover.MalformedManifest(currentWorkingFile, InputFolder, OutputFolder);
+                                continue;
+                            }
                             else
                             {
                                 if (!Directory.Exists(realOutputFolder))
@@ -198,9 +212,15 @@ namespace ZipmodHelper
                                 this.Dispatcher.Invoke(() =>
                                 {
                                     Debug.Assert(RandomizeCAB.IsChecked != null, "RandomizeCAB.IsChecked != null");
-                                    Misc.PerformCompression(tempFile, RandomizeCAB.IsChecked.Value);
+                                    Misc.PerformCompression(tempFile, RandomizeCAB.IsChecked.Value, CABOverride);
                                 });
                             }
+
+                            // midl for testing
+
+                            // outFile = currentWorkingFile.Remove(0, currentDir.Length + 1);
+
+                            // midl end
 
                             ZipHandler.Seal(TempFolder, realOutputFolder, outFile);
 
@@ -219,6 +239,8 @@ namespace ZipmodHelper
                     }
                 }
             }
+
+            MessageBox.Show("Done");
         }
 
         private void PopDBBtn_Click(object sender, RoutedEventArgs e)

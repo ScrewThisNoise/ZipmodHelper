@@ -98,9 +98,11 @@ namespace ScrewLib
 
         private static void MoveIt(string currentFile, string outDir, string Game, string type)
         {
-            if (!Directory.Exists($@"{outDir}\UserData{Game}\{type}\"))
-                Directory.CreateDirectory($@"{outDir}\UserData{Game}\{type}\");
-            outDir = $@"{outDir}\UserData{Game}\{type}\";
+            var userdatafolder = Game == "Unknown" ? "UnknownImage" : $"UserData{Game}";
+
+            if (!Directory.Exists($@"{outDir}\{userdatafolder}\{type}\"))
+                Directory.CreateDirectory($@"{outDir}\{userdatafolder}\{type}\");
+            outDir = $@"{outDir}\{userdatafolder}\{type}\";
             string FileName = Misc.FileExists(outDir, currentFile);
             File.Copy(currentFile, $@"{outDir}\{FileName}");
         }
@@ -161,6 +163,8 @@ namespace ScrewLib
                 }
                 catch (Exception e)
                 {
+                    Logger.Writer($"Unknown image {filename}!");
+                    MoveIt(currentFile, outDir, "Unknown", "");
                     throw;
                 }
 
