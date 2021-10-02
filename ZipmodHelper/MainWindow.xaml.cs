@@ -26,6 +26,10 @@ namespace ZipmodHelper
         private bool aisGameTag = false;
         private bool hs2GameTag = false;
 
+        private bool skiprenaming;
+        private bool skipcompression;
+        private bool skipremovejunk;
+
         readonly BackgroundWorker bgWorker = new BackgroundWorker();
 
         #endregion
@@ -213,6 +217,8 @@ namespace ZipmodHelper
                                 Logger.Writer($"Old name: {currentWorkingFile.Remove(0, currentDir.Length + 1)}.");
                                 Logger.Writer($"New name: {outFile}.");
 
+                                if (skiprenaming) outFile = currentWorkingFile.Remove(0, currentDir.Length + 1);
+
                                 var oMD5 = MD5Calc.CalculateMD5(currentWorkingFile);
                                 Logger.Writer($"Original MD5: {oMD5}");
                             }
@@ -221,13 +227,13 @@ namespace ZipmodHelper
 
                             string[] removeExt = new[] { ".png", ".jpg" };
 
-                            Misc.RemoveFiles(TempFolder, OutputFolder, removeExt);
+                            if (!skipremovejunk) Misc.RemoveFiles(TempFolder, OutputFolder, removeExt);
                             foreach (var tempFile in Directory.EnumerateFiles(TempFolder, "*.*", SearchOption.AllDirectories))
                             {
                                 this.Dispatcher.Invoke(() =>
                                 {
                                     Debug.Assert(RandomizeCAB.IsChecked != null, "RandomizeCAB.IsChecked != null");
-                                    Misc.PerformCompression(tempFile, RandomizeCAB.IsChecked.Value, CABOverride);
+                                    if (!skipcompression) Misc.PerformCompression(tempFile, RandomizeCAB.IsChecked.Value, CABOverride);
                                 });
                             }
 
@@ -236,6 +242,8 @@ namespace ZipmodHelper
                             // outFile = currentWorkingFile.Remove(0, currentDir.Length + 1);
 
                             // midl end
+
+                            
 
                             ZipHandler.Seal(TempFolder, realOutputFolder, outFile);
 
@@ -286,6 +294,36 @@ namespace ZipmodHelper
                 tagList.Add("AI Girl");
             if (HS2tag.IsChecked ?? true)
                 tagList.Add("Honey Select 2");
+        }
+
+        private void SkipRenameTgl_OnChecked(object sender, RoutedEventArgs e)
+        {
+            skiprenaming = true;
+        }
+
+        private void SkipRenameTgl_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            skiprenaming = false;
+        }
+
+        private void SkipCompressionTgl_OnChecked(object sender, RoutedEventArgs e)
+        {
+            skipcompression = true;
+        }
+
+        private void SkipCompressionTgl_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            skipcompression = false;
+        }
+
+        private void SkipCleanupTgl_OnChecked(object sender, RoutedEventArgs e)
+        {
+            skipremovejunk = true;
+        }
+
+        private void SkipCleanupTgl_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            skipremovejunk = false;
         }
     }
 }

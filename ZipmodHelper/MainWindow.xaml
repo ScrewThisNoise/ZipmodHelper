@@ -37,6 +37,12 @@
                 VerticalAlignment="Top" Width="75" Height="22" Click="TempFolderBtn_Click" />
         <CheckBox x:Name="RandomizeCAB" Content="Randomize CAB" HorizontalAlignment="Left" Margin="10,164,0,0"
                   VerticalAlignment="Top" IsChecked="True" />
+        <CheckBox x:Name="SkipRenameTgl" Content="Skip Renaming" HorizontalAlignment="Left" Margin="119,164,0,0"
+                  VerticalAlignment="Top" Checked="SkipRenameTgl_OnChecked" Unchecked="SkipRenameTgl_OnUnchecked"/>
+        <CheckBox x:Name="SkipCompressionTgl" Content="Skip Compression" HorizontalAlignment="Left" Margin="223,164,0,0"
+                  VerticalAlignment="Top" Checked="SkipCompressionTgl_OnChecked" Unchecked="SkipCompressionTgl_OnUnchecked"/>
+        <CheckBox x:Name="SkipCleanupTgl" Content="Skip junk file cleanup" HorizontalAlignment="Left" Margin="343,164,0,0"
+                  VerticalAlignment="Top" Checked="SkipCleanupTgl_OnChecked" Unchecked="SkipCleanupTgl_OnUnchecked"/>
         <Button x:Name="StartBtn" Content="Start" HorizontalAlignment="Left" Margin="692,199,0,0"
                 VerticalAlignment="Top" Width="75" Click="StartBtn_Click" />
         <Button x:Name="PopDBBtn" Content="Only Populate DB" HorizontalAlignment="Left" Margin="575,199,0,0"
