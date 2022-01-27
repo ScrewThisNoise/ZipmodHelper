@@ -42,12 +42,12 @@
                         <ColumnDefinition Width="80px"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Row="0">
-                        <TextBlock Text="Input folder:" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="Input folder:" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                     </Grid>
                     <Grid Row="1">
-                        <TextBox Text=".\BleedingEdge" VerticalContentAlignment="Center"></TextBox>
+                        <TextBox x:Name="folderboxInput" Text=".\BleedingEdge" VerticalContentAlignment="Center"></TextBox>
                     </Grid>
-                    <Button Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
+                    <Button x:Name="browseInput" Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
                 </Grid>
                 <Grid Row="2" Margin="2">
                     <Grid.RowDefinitions>
@@ -59,12 +59,12 @@
                         <ColumnDefinition Width="80px"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Row="0">
-                        <TextBlock Text="Output folder:" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="Output folder:" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                     </Grid>
                     <Grid Row="1">
-                        <TextBox Text=".\Output" VerticalContentAlignment="Center"></TextBox>
+                        <TextBox x:Name="folderboxOutput" Text=".\Output" VerticalContentAlignment="Center"></TextBox>
                     </Grid>
-                    <Button Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
+                    <Button x:Name="browseOutput" Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
                 </Grid>
                 <Grid Row="3" Margin="2">
                     <Grid.RowDefinitions>
@@ -76,12 +76,12 @@
                         <ColumnDefinition Width="80px"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Row="0">
-                        <TextBlock Text="Temp folder:" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="Temp folder:" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                     </Grid>
                     <Grid Row="1">
-                        <TextBox Text=".\WorkingDir" VerticalContentAlignment="Center"></TextBox>
+                        <TextBox x:Name="folderboxTemp" Text=".\WorkingDir" VerticalContentAlignment="Center"></TextBox>
                     </Grid>
-                    <Button Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
+                    <Button x:Name="browseTemp" Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
                 </Grid>
                 <Grid Column="1" Row="1" RowSpan="4">
                     <Image Source="img/BRLogo.png" Width="150px"></Image>
@@ -101,19 +101,19 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid ColumnSpan="6">
-                    <TextBlock Text="Options:"></TextBlock>
+                    <TextBlock Text="Options:" FontWeight="Bold"></TextBlock>
                 </Grid>
                 <Grid Row="1" Column="0">
-                    <CheckBox Content="Randomize CAB"></CheckBox>
+                    <CheckBox x:Name="optionCAB" Content="Randomize CAB"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="1">
-                    <CheckBox Content="Skip Renaming"></CheckBox>
+                    <CheckBox x:Name="optionRename" Content="Skip Renaming"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="2">
-                    <CheckBox Content="Skip Compression"></CheckBox>
+                    <CheckBox x:Name="optionComp" Content="Skip Compression"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="3">
-                    <CheckBox Content="Skip Junk Cleanup"></CheckBox>
+                    <CheckBox x:Name="optionJunk" Content="Skip Junk Cleanup"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="4">
                 </Grid>
@@ -134,35 +134,35 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid ColumnSpan="6">
-                    <TextBlock Text="Change game tag (Leave all unchecked to not change):"></TextBlock>
+                    <TextBlock Text="Change game tag (Leave all unchecked to not change):" FontWeight="Bold"></TextBlock>
                 </Grid>
                 <Grid Row="1" Column="0">
-                    <CheckBox Content="KK"></CheckBox>
+                    <CheckBox x:Name="GametagKK" Content="KK"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="1">
-                    <CheckBox Content="KKS"></CheckBox>
+                    <CheckBox x:Name="GametagKKS" Content="KKS"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="2">
-                    <CheckBox Content="EC"></CheckBox>
+                    <CheckBox x:Name="GametagEC" Content="EC"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="3">
-                    <CheckBox Content="AIS"></CheckBox>
+                    <CheckBox x:Name="GametagAIS" Content="AIS"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="4">
-                    <CheckBox Content="HS2"></CheckBox>
+                    <CheckBox x:Name="GametagHS2" Content="HS2"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="5">
-                    <CheckBox Content="Remove all"></CheckBox>
+                    <CheckBox x:Name="GametagRemove" Content="Remove all"></CheckBox>
                 </Grid>
             </Grid>
-            <Button Content="Start" Height="30px" Grid.Row="3" Margin="5px"/>
+            <Button x:Name="startBTN" Content="Start" Height="30px" Grid.Row="3" Margin="5px"/>
         </Grid>
 
         <Grid Row="1">
             <TextBox x:Name="UILogger"></TextBox>
         </Grid>
         <Grid Row="2">
-            <TextBlock TextAlignment="Right" Text="v2.0.0" Padding="4,0"></TextBlock>
+            <TextBlock x:Name="versionDisplay" TextAlignment="Right" Text="v2.0.0" Padding="4,0"></TextBlock>
         </Grid>
     </Grid>
 </Window>

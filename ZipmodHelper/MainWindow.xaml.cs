@@ -18,7 +18,6 @@ namespace ZipmodHelper
 
         public MainWindow()
         {
-
             InitializeComponent();
 
             // Redirecting the console log
