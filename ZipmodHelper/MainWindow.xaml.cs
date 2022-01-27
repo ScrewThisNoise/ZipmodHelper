@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using ScrewLib;
@@ -14,7 +14,8 @@ namespace ZipmodHelper
     public partial class MainWindow : Window
     {
         #region Variables
-        private static string version = "v2.0.0";
+        private readonly CancellationToken _cts = new CancellationToken();
+        private static string _version = "v2.0.0";
         #endregion
 
         public MainWindow()
@@ -26,8 +27,8 @@ namespace ZipmodHelper
             outputter = new ScrewLib.TextBoxOutputter(UILogger);
             Console.SetOut(outputter);
             Logger.Initiate();
-            Logger.Writer($"ZipmodHelper {version}");
-            versionDisplay.Text = version;
+            Logger.Writer($"ZipmodHelper {_version}");
+            versionDisplay.Text = _version;
         }
 
         private async void startBTN_Click(object sender, RoutedEventArgs e)
@@ -36,7 +37,7 @@ namespace ZipmodHelper
 
             try
             {
-                await DoWork.StartAsync(folderboxInput.Text, folderboxOutput.Text, folderboxTemp.Text);
+                await DoWork.StartAsync(folderboxInput.Text, folderboxOutput.Text, folderboxTemp.Text, _cts);
             }
             catch (Exception exception)
             {

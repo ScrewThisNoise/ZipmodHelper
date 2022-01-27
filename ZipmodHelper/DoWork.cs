@@ -3,21 +3,53 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using ScrewLib;
 
 namespace ZipmodHelper
 {
     internal class DoWork
     {
-        public static async Task StartAsync(string inputFolder, string outputFolder, string tempFolder)
+        public static async Task StartAsync(string inputFolder, string outputFolder, string tempFolder, CancellationToken cancellationToken)
         {
-            await CreateDirectories(inputFolder, outputFolder, tempFolder);
+            try
+            {
+                await CreateDirectories(inputFolder, outputFolder, tempFolder);
+            }
+            catch (Exception e)
+            {
+                Logger.Writer(e.ToString());
+                Logger.Writer("Creating directories failed. Cancelling.");
+                return;
+            }
+
             List<string> fileList = PrepareList(inputFolder);
-            Logger.Writer($"{fileList.Count} files found in {inputFolder}, starting processing.");
+            ProgressModel report = new ProgressModel();
+            List<FileModel> output = new List<FileModel>();
+
+            Logger.Writer($"{fileList.Count} file(s) found in {inputFolder}, starting processing.");
+
             foreach (string file in fileList)
             {
+                
+                string fileExt = Path.GetExtension(file).Remove(0,1);
 
+                switch (fileExt)
+                {
+                    case "zipmod":
+                    case "zip":
+                        await WorkZIP(Path.GetDirectoryName(file), Path.GetFileName(file), outputFolder);
+                        break;
+                    case "png":
+                    case "jpg":
+                    case "jpeg":
+                        await WorkImage(Path.GetDirectoryName(file), Path.GetFileName(file), outputFolder);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -39,14 +71,17 @@ namespace ZipmodHelper
             return output;
         }
 
-        private static void WorkImage(string path, string file)
+        private static async Task WorkImage(string path, string file, string outPath)
         {
-            throw new NotImplementedException();
+            string ImagesOut = $@"{outPath}\Images\LooseFiles";
+            string CompleteFile = $@"{path}\{file}";
+            if (!Directory.Exists(ImagesOut)) Directory.CreateDirectory(ImagesOut);
+            await Task.Run(() => File.Copy(CompleteFile, $@"{ImagesOut}\{file}"));
         }
 
-        private static void WorkZIP(string path, string file)
+        private static async Task WorkZIP(string path, string file, string outPath)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
