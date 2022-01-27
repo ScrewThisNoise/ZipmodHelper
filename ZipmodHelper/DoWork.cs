@@ -40,7 +40,7 @@ namespace ZipmodHelper
                 {
                     case "zipmod":
                     case "zip":
-                        await WorkZIP(Path.GetDirectoryName(file), Path.GetFileName(file), outputFolder);
+                        await WorkZIP(Path.GetDirectoryName(file), Path.GetFileName(file), tempFolder);
                         break;
                     case "png":
                     case "jpg":
@@ -74,14 +74,17 @@ namespace ZipmodHelper
         private static async Task WorkImage(string path, string file, string outPath)
         {
             string ImagesOut = $@"{outPath}\Images\LooseFiles";
+            
             string CompleteFile = $@"{path}\{file}";
             if (!Directory.Exists(ImagesOut)) Directory.CreateDirectory(ImagesOut);
-            await Task.Run(() => File.Copy(CompleteFile, $@"{ImagesOut}\{file}"));
+            await MiscFunc.CopyFile(path, ImagesOut, file);
         }
 
         private static async Task WorkZIP(string path, string file, string outPath)
         {
-            
+            string ExtractOut = $@"{outPath}";
+            string CompleteFile = $@"{path}\{file}";
+            ZipHandler.Extract(CompleteFile, ExtractOut);
         }
     }
 }

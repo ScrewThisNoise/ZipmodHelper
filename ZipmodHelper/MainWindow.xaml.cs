@@ -42,7 +42,7 @@ namespace ZipmodHelper
             catch (Exception exception)
             {
                 Logger.Writer(exception.ToString());
-                throw;
+                Logger.Writer("Unknown error! Cancelling.");
             }
 
             watch.Stop();
