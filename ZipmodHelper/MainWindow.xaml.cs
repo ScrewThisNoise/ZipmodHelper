@@ -34,7 +34,15 @@ namespace ZipmodHelper
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            DoWork.Start(folderboxInput.Text, folderboxOutput.Text, folderboxTemp.Text);
+            try
+            {
+                await DoWork.StartAsync(folderboxInput.Text, folderboxOutput.Text, folderboxTemp.Text);
+            }
+            catch (Exception exception)
+            {
+                Logger.Writer(exception.ToString());
+                throw;
+            }
 
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
