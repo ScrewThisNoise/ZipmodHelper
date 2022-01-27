@@ -4,76 +4,165 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="BetterRepack ZipMod Helper" Height="450" Width="800"
+        Title="BetterRepack ZipMod Helper" Height="650" Width="800"
         ResizeMode="NoResize">
     <Grid>
-        <Image x:Name="Logo" Margin="580,49,27,290" Source="img/BRLogo.png" />
-        <TextBox x:Name="LoggerBox" TextChanged="TextChangedEventHandler"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible" Height="178" Margin="0,233,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" />
-        <TextBlock x:Name="InputFolderLabel" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap"
-                   VerticalAlignment="Top" Height="16" Width="72">
-            <Run Text="Input Fol" /><Run Text="d" /><Run Text="er:" />
-        </TextBlock>
-        <TextBox x:Name="InputFolderText" HorizontalAlignment="Left" Height="22" Margin="10,31,0,0" TextWrapping="Wrap"
-                 Text=".\BleedingEdge" VerticalAlignment="Top" Width="442" TextChanged="InputFolderText_OnTextChanged" />
-        <Button x:Name="InputFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="457,31,0,0"
-                VerticalAlignment="Top" Width="75" Height="22" Click="InputFolderBtn_Click" />
-        <TextBlock x:Name="OutputFolderLabel" HorizontalAlignment="Left" Margin="10,58,0,0" TextWrapping="Wrap"
-                   Text="Output Folder:" VerticalAlignment="Top" />
-        <TextBox x:Name="OutputFolderText" HorizontalAlignment="Left" Height="22" Margin="10,79,0,0"
-                 TextWrapping="Wrap" Text=".\Output" VerticalAlignment="Top" Width="442"
-                 TextChanged="OutputFolderText_OnTextChanged" />
-        <Button x:Name="OutputFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="457,79,0,0"
-                VerticalAlignment="Top" Width="75" Height="22" Click="OutputFolderBtn_Click" />
-        <TextBlock x:Name="TempFolderLabel" HorizontalAlignment="Left" Margin="10,106,0,0" TextWrapping="Wrap"
-                   VerticalAlignment="Top">
-            <Run Text="Temp" /><Run Text=" Folder:" />
-        </TextBlock>
-        <TextBox x:Name="TempFolderText" HorizontalAlignment="Left" Height="22" Margin="10,127,0,0" TextWrapping="Wrap"
-                 Text=".\WorkingDir" VerticalAlignment="Top" Width="442" TextChanged="TempFolderText_OnTextChanged" />
-        <Button x:Name="TempFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="457,127,0,0"
-                VerticalAlignment="Top" Width="75" Height="22" Click="TempFolderBtn_Click" />
-        <CheckBox x:Name="RandomizeCAB" Content="Randomize CAB" HorizontalAlignment="Left" Margin="10,164,0,0"
-                  VerticalAlignment="Top" IsChecked="True" />
-        <CheckBox x:Name="SkipRenameTgl" Content="Skip Renaming" HorizontalAlignment="Left" Margin="119,164,0,0"
-                  VerticalAlignment="Top" Checked="SkipRenameTgl_OnChecked" Unchecked="SkipRenameTgl_OnUnchecked"/>
-        <CheckBox x:Name="SkipCompressionTgl" Content="Skip Compression" HorizontalAlignment="Left" Margin="223,164,0,0"
-                  VerticalAlignment="Top" Checked="SkipCompressionTgl_OnChecked" Unchecked="SkipCompressionTgl_OnUnchecked"/>
-        <CheckBox x:Name="SkipCleanupTgl" Content="Skip junk file cleanup" HorizontalAlignment="Left" Margin="343,164,0,0"
-                  VerticalAlignment="Top" Checked="SkipCleanupTgl_OnChecked" Unchecked="SkipCleanupTgl_OnUnchecked"/>
-        <Button x:Name="StartBtn" Content="Start" HorizontalAlignment="Left" Margin="692,199,0,0"
-                VerticalAlignment="Top" Width="75" Click="StartBtn_Click" />
-        <Button x:Name="PopDBBtn" Content="Only Populate DB" HorizontalAlignment="Left" Margin="575,199,0,0"
-                VerticalAlignment="Top" Width="112" Click="PopDBBtn_Click" />
-        <StackPanel HorizontalAlignment="Left" Height="44" Margin="10,184,0,0" VerticalAlignment="Top" Width="544">
-            <Label x:Name="label" Content="Change game tag (max 2):" Height="24" FontSize="10" />
-            <Grid Height="20">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20px"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="40px"></RowDefinition>
+                <RowDefinition Height="40px"></RowDefinition>
+                <RowDefinition Height="40px"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10px"></RowDefinition>
+                    <RowDefinition Height="50px"></RowDefinition>
+                    <RowDefinition Height="50px"></RowDefinition>
+                    <RowDefinition Height="50px"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="200px"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
-                <CheckBox x:Name="KKtag" Content="KK" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,57,0" />
-                <CheckBox x:Name="KKStag" Grid.Column="1" Content="KKS" HorizontalAlignment="Left"
-                          VerticalAlignment="Top" />
-                <CheckBox x:Name="ECtag" Grid.Column="2" Content="EC" HorizontalAlignment="Left"
-                          VerticalAlignment="Top" />
-                <CheckBox x:Name="AIStag" Grid.Column="3" Content="AIS" HorizontalAlignment="Left"
-                          VerticalAlignment="Top" />
-                <CheckBox x:Name="HS2tag" Grid.Column="4" Content="HS2" HorizontalAlignment="Left"
-                          VerticalAlignment="Top" />
-                <CheckBox x:Name="Removetag" Grid.Column="5" Content="Remove all" HorizontalAlignment="Left"
-                          VerticalAlignment="Top"/>
-
+                <Grid Row="1" Margin="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="80px"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Row="0">
+                        <TextBlock Text="Input folder:" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Row="1">
+                        <TextBox Text=".\BleedingEdge" VerticalContentAlignment="Center"></TextBox>
+                    </Grid>
+                    <Button Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
+                </Grid>
+                <Grid Row="2" Margin="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="80px"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Row="0">
+                        <TextBlock Text="Output folder:" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Row="1">
+                        <TextBox Text=".\Output" VerticalContentAlignment="Center"></TextBox>
+                    </Grid>
+                    <Button Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
+                </Grid>
+                <Grid Row="3" Margin="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="80px"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Row="0">
+                        <TextBlock Text="Temp folder:" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Row="1">
+                        <TextBox Text=".\WorkingDir" VerticalContentAlignment="Center"></TextBox>
+                    </Grid>
+                    <Button Grid.Row="1" Grid.Column="1" Margin="2,0" Content="Browse"></Button>
+                </Grid>
+                <Grid Column="1" Row="1" RowSpan="4">
+                    <Image Source="img/BRLogo.png" Width="150px"></Image>
+                </Grid>
             </Grid>
+            <Grid Row="1" Margin="2,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid ColumnSpan="6">
+                    <TextBlock Text="Options:"></TextBlock>
+                </Grid>
+                <Grid Row="1" Column="0">
+                    <CheckBox Content="Randomize CAB"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="1">
+                    <CheckBox Content="Skip Renaming"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="2">
+                    <CheckBox Content="Skip Compression"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="3">
+                    <CheckBox Content="Skip Junk Cleanup"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="4">
+                </Grid>
+                <Grid Row="1" Column="5">
+                </Grid>
+            </Grid>
+            <Grid Row="2" Margin="2,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid ColumnSpan="6">
+                    <TextBlock Text="Change game tag (Leave all unchecked to not change):"></TextBlock>
+                </Grid>
+                <Grid Row="1" Column="0">
+                    <CheckBox Content="KK"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="1">
+                    <CheckBox Content="KKS"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="2">
+                    <CheckBox Content="EC"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="3">
+                    <CheckBox Content="AIS"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="4">
+                    <CheckBox Content="HS2"></CheckBox>
+                </Grid>
+                <Grid Row="1" Column="5">
+                    <CheckBox Content="Remove all"></CheckBox>
+                </Grid>
+            </Grid>
+            <Button Content="Start" Height="30px" Grid.Row="3" Margin="5px"/>
+        </Grid>
 
-        </StackPanel>
-
+        <Grid Row="1">
+            <TextBox x:Name="UILogger"></TextBox>
+        </Grid>
+        <Grid Row="2">
+            <TextBlock TextAlignment="Right" Text="v2.0.0" Padding="4,0"></TextBlock>
+        </Grid>
     </Grid>
 </Window>
