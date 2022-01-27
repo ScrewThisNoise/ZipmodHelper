@@ -32,7 +32,13 @@ namespace ZipmodHelper
 
         private async void startBTN_Click(object sender, RoutedEventArgs e)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             DoWork.Start(folderboxInput.Text, folderboxOutput.Text, folderboxTemp.Text);
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Logger.Writer($"All tasks complete. Execution time: {elapsedMs}ms.");
         }
 
         #region FolderButtons
