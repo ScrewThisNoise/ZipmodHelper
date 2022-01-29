@@ -16,7 +16,9 @@ namespace ZipmodHelper
         {
             try
             {
-                await CreateDirectories(inputFolder, outputFolder, tempFolder);
+                await MiscFunc.CreateDirectories(inputFolder);
+                await MiscFunc.CreateDirectories(outputFolder);
+                await MiscFunc.CreateDirectories(tempFolder);
             }
             catch (Exception e)
             {
@@ -35,12 +37,12 @@ namespace ZipmodHelper
             {
                 
                 string fileExt = Path.GetExtension(file).Remove(0,1);
-
+                
                 switch (fileExt)
                 {
                     case "zipmod":
                     case "zip":
-                        await WorkZIP(Path.GetDirectoryName(file), Path.GetFileName(file), tempFolder);
+                        await WorkZIP(Path.GetDirectoryName(file), Path.GetFileName(file), tempFolder, outputFolder);
                         break;
                     case "png":
                     case "jpg":
@@ -51,13 +53,6 @@ namespace ZipmodHelper
                         break;
                 }
             }
-        }
-
-        private static async Task CreateDirectories(string inputFolder, string outputFolder, string tempFolder)
-        {
-            if (!Directory.Exists(inputFolder)) Directory.CreateDirectory(inputFolder);
-            if (!Directory.Exists(outputFolder)) Directory.CreateDirectory(outputFolder);
-            if (!Directory.Exists(tempFolder)) Directory.CreateDirectory(tempFolder);
         }
 
         private static List<string> PrepareList(string path)
@@ -80,11 +75,36 @@ namespace ZipmodHelper
             await MiscFunc.CopyFile(path, ImagesOut, file);
         }
 
-        private static async Task WorkZIP(string path, string file, string outPath)
+        private static async Task WorkZIP(string path, string file, string tempPath, string outPath)
         {
-            string ExtractOut = $@"{outPath}";
-            string CompleteFile = $@"{path}\{file}";
-            ZipHandler.Extract(CompleteFile, ExtractOut);
+            string extractOut = $@"{tempPath}";
+            string completeFile = $@"{path}\{file}";
+            await Task.Run((() => ZipHandler.Extract(completeFile, extractOut)));
+
+            await ManifestHandler.Run($@"{tempPath}\manifest.xml");
+
+            await Task.Run((() => Directory.Delete(tempPath, true)));
+        }
+
+        private static async Task ReadManifest()
+        {
+
+        }
+
+        public class ManifestNotFoundException : Exception
+        {
+            public ManifestNotFoundException()
+            {
+            }
+
+            public ManifestNotFoundException(string message)
+            {
+            }
+
+            public ManifestNotFoundException(string message, Exception inner)
+                : base(message, inner)
+            {
+            }
         }
     }
 }

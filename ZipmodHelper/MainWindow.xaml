@@ -147,7 +147,7 @@
                     <CheckBox x:Name="GametagEC" Content="EC"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="3">
-                    <CheckBox x:Name="GametagAIS" Content="AIS"></CheckBox>
+                    <CheckBox x:Name="GametagAI" Content="AIS"></CheckBox>
                 </Grid>
                 <Grid Row="1" Column="4">
                     <CheckBox x:Name="GametagHS2" Content="HS2"></CheckBox>
